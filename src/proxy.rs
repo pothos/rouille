@@ -66,7 +66,13 @@ use std::io::Error as IoError;
 use std::io::BufRead;
 use std::io::Read;
 use std::io::Write;
+#[cfg(feature = "usnet")]
+use usnet_sockets::TcpStream;
+#[cfg(not(feature = "usnet"))]
 use std::net::TcpStream;
+#[cfg(feature = "usnet")]
+use usnet_sockets::UsnetToSocketAddrs as ToSocketAddrs;
+#[cfg(not(feature = "usnet"))]
 use std::net::ToSocketAddrs;
 use std::time::Duration;
 

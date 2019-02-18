@@ -52,6 +52,9 @@
 
 #![deny(unsafe_code)]
 
+#[cfg(feature = "usnet")]
+extern crate usnet_sockets;
+
 extern crate base64;
 #[cfg(feature = "brotli2")]
 extern crate brotli2;
@@ -84,6 +87,9 @@ use std::io::Result as IoResult;
 use std::io::Read;
 use std::marker::PhantomData;
 use std::net::SocketAddr;
+#[cfg(feature = "usnet")]
+use usnet_sockets::UsnetToSocketAddrs as ToSocketAddrs;
+#[cfg(not(feature = "usnet"))]
 use std::net::ToSocketAddrs;
 use std::panic;
 use std::panic::AssertUnwindSafe;
